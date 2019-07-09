@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Teste mascaras</title>
+</head>
+<body>
+	<p>CPF</p>
+	<strong id="cpf">94552271008</strong>
+	<br>
+	<p>CNPJ</p>
+	<strong id="cnpj">53571541000136</strong>
+	<br>
+	<p>TELEFONE</p>
+	<strong id="tel">6120832045</strong>
+	<br>
+	<p>CELULAR</p>
+	<strong id="cel">61999362510</strong>
+	<br>
+
+	<script language="javascript">
+		let cpfmask = document.getElementById('cpf').innerText;
+		let cnpjmask = document.getElementById('cnpj').innerText;
+		let phonemask = document.getElementById('tel').innerText;
+		let phonemask2 = document.getElementById('cel').innerText;
+		window.onload = (formataPhone(), Cpf(), Cnpj());
+
+		function Cpf(){
+			//remove qualquer caractere que nao sejam numeros
+			cpfmask = cpfmask.replace(/\D/g,"");
+			//formata na mascara usando o regex para cpf
+			cpfmask = cpfmask.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,"$1.$2.$3-$4");
+			document.getElementById('cpf').innerHTML = cpfmask;
+			return cpfmask;
+		}
+
+		function Cnpj(){
+			//remove qualquer caractere que nao seja números
+			cnpjmask = cnpjmask.replace(/\D/g,"");
+			//formata na mascara usando o regex para cnpj
+			cnpjmask = cnpjmask.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,"$1.$2.$3\/$4-$5");
+			document.getElementById('cnpj').innerHTML = cnpjmask;
+			return cnpjmask;
+		}
+
+		function formataPhone () {
+			if (phonemask.length === 10) {
+				phonemask = phonemask.replace(/\D/g,"");
+				phonemask = phonemask.replace(/^(\d{2})(\d{4})(\d{4}).*/,"($1) $2-$3");
+				document.getElementById('tel').innerHTML = phonemask;
+			}
+
+			if(phonemask2.length === 11) {
+				phonemask2 = phonemask2.replace(/\D/g,"");
+				phonemask2 = phonemask2.replace(/^(\d{2})(\d{1})(\d{4})(\d{4}).*/,"($1) $2 $3-$4");
+				document.getElementById('cel').innerHTML = phonemask2;
+			}
+		}
+	</script>
+</body>
+</html>
